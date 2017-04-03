@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "mpociot/botman": "dev-master",
+        "mpociot/botman": "^1.4",
         "clue/stdio-react": "^1.0",
         "mpociot/slack-client": "^0.2.6",
         "illuminate/support": "~5.0"
