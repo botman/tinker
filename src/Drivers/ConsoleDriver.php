@@ -151,7 +151,7 @@ class ConsoleDriver implements DriverInterface
             $text = $message;
         }
 
-        return compact($text, $questionData);
+        return compact('text', 'questionData');
     }
 
     /**
