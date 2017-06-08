@@ -1,5 +1,5 @@
 {
-    "name": "mpociot/botman-tinker",
+    "name": "botman/tinker",
     "license": "MIT",
     "description": "BotMan tinker command for your Laravel BotMan project",
     "keywords": [
@@ -8,7 +8,7 @@
         "Laravel",
         "Tinker"
     ],
-    "homepage": "http://github.com/mpociot/botman-tinker",
+    "homepage": "http://github.com/botman/tinker",
     "authors": [
         {
             "name": "Marcel Pociot",
@@ -17,10 +17,10 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "mpociot/botman": "dev-master",
+        "mpociot/botman": "~2.0",
         "clue/stdio-react": "^1.0",
-        "mpociot/slack-client": "^0.2.6",
         "illuminate/support": "~5.0"
+        "mpociot/slack-client": "^0.2.6",
     },
     "require-dev": {
         "orchestra/testbench": "~3.0",
@@ -28,7 +28,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Mpociot\\BotManTinker\\": "src/"
+            "BotMan\\Tinker\\": "src/"
         }
-    }
+    },
+    "extras": {
+        "laravel": {
+            "providers": [
+                "BotMan\\Tinker\\TinkerServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

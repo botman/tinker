@@ -1,15 +1,15 @@
 <?php
 
-namespace Mpociot\BotManTinker\Commands;
+namespace BotMan\Tinker\Commands;
 
 use Clue\React\Stdio\Stdio;
 use React\EventLoop\Factory;
 use Illuminate\Console\Command;
-use Mpociot\BotMan\BotManFactory;
-use Mpociot\BotMan\Cache\ArrayCache;
-use Mpociot\BotManTinker\Drivers\ConsoleDriver;
+use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Cache\ArrayCache;
+use BotMan\Tinker\Drivers\ConsoleDriver;
 
-class BotManTinker extends Command
+class Tinker extends Command
 {
     /**
      * The name and signature of the console command.

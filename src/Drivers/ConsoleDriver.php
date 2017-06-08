@@ -1,15 +1,16 @@
 <?php
 
-namespace Mpociot\BotManTinker\Drivers;
+namespace BotMan\Tinker\Drivers;
 
-use Mpociot\BotMan\User;
-use Mpociot\BotMan\Answer;
-use Mpociot\BotMan\Message;
 use Clue\React\Stdio\Stdio;
-use Mpociot\BotMan\Question;
+use BotMan\BotMan\Users\User;
 use Illuminate\Support\Collection;
-use Mpociot\BotMan\Interfaces\DriverInterface;
-use Mpociot\BotMan\Messages\Message as IncomingMessage;
+use BotMan\BotMan\Messages\Incoming\Answer;
+use BotMan\BotMan\Interfaces\DriverInterface;
+use BotMan\BotMan\Messages\Outgoing\Question;
+use Symfony\Component\HttpFoundation\Response;
+use BotMan\BotMan\Messages\Incoming\IncomingMessage;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
 class ConsoleDriver implements DriverInterface
 {
@@ -69,10 +70,10 @@ class ConsoleDriver implements DriverInterface
     }
 
     /**
-     * @param  Message $message
+     * @param  IncomingMessage $message
      * @return Answer
      */
-    public function getConversationAnswer(Message $message)
+    public function getConversationAnswer(IncomingMessage $message)
     {
         $index = (int)$message->getMessage() - 1;
 
@@ -93,7 +94,7 @@ class ConsoleDriver implements DriverInterface
      */
     public function getMessages()
     {
-        return [new Message($this->message, 999, '#channel', $this->message)];
+        return [new IncomingMessage($this->message, 999, '#channel', $this->message)];
     }
 
     /**
@@ -105,52 +106,21 @@ class ConsoleDriver implements DriverInterface
     }
 
     /**
-     * @param string|Question|IncomingMessage $message
-     * @param Message $matchingMessage
-     * @param array $additionalParameters
-     * @return $this
-     */
-    public function reply($message, $matchingMessage, $additionalParameters = [])
-    {
-        $questionData = null;
-        if ($message instanceof IncomingMessage) {
-            $text = $message->getMessage();
-        } elseif ($message instanceof Question) {
-            $text = $message->getText();
-            $questionData = $message->toArray();
-        } else {
-            $text = $message;
-        }
-
-        $this->client->writeln(self::BOT_NAME.': '.$text);
-
-        if (!is_null($questionData)) {
-            foreach ($questionData['actions'] as $key => $action) {
-                $this->client->writeln(($key+1).') '.$action['text']);
-            }
-            $this->hasQuestion = true;
-            $this->lastQuestions = $questionData['actions'];
-        }
-
-        return $this;
-    }
-
-    /**
      * Send a typing indicator.
-     * @param Message $matchingMessage
+     * @param IncomingMessage $matchingMessage
      * @return mixed
      */
-    public function types(Message $matchingMessage)
+    public function types(IncomingMessage $matchingMessage)
     {
         $this->client->writeln(self::BOT_NAME.': ...');
     }
 
     /**
      * Retrieve User information.
-     * @param Message $matchingMessage
+     * @param IncomingMessage $matchingMessage
      * @return User
      */
-    public function getUser(Message $matchingMessage)
+    public function getUser(IncomingMessage $matchingMessage)
     {
         return new User($matchingMessage->getUser());
     }
@@ -159,6 +129,65 @@ class ConsoleDriver implements DriverInterface
      * @return bool
      */
     public function isConfigured()
+    {
+        return false;
+    }
+
+    /**
+     * @param string|\BotMan\BotMan\Messages\Outgoing\Question $message
+     * @param IncomingMessage $matchingMessage
+     * @param array $additionalParameters
+     * @return $this
+     */
+    public function buildServicePayload($message, $matchingMessage, $additionalParameters = [])
+    {
+        $questionData = null;
+        if ($message instanceof OutgoingMessage) {
+            $text = $message->getText();
+        } elseif ($message instanceof Question) {
+            $text = $message->getText();
+            $questionData = $message->toArray();
+        } else {
+            $text = $message;
+        }
+
+        return compact($text, $questionData);
+    }
+
+    /**
+     * @param mixed $payload
+     * @return Response
+     */
+    public function sendPayload($payload)
+    {
+        $questionData = $payload['questionData'];
+        $this->client->writeln(self::BOT_NAME.': '.$payload['text']);
+
+        if (!is_null($questionData)) {
+            foreach ($questionData['actions'] as $key => $action) {
+                $this->client->writeln(($key+1).') '.$action['text']);
+            }
+            $this->hasQuestion = true;
+            $this->lastQuestions = $questionData['actions'];
+        }
+    }
+
+    /**
+     * Does the driver match to an incoming messaging service event.
+     *
+     * @return bool|mixed
+     */
+    public function hasMatchingEvent()
+    {
+        return false;
+    }
+
+    /**
+     * Tells if the stored conversation callbacks are serialized.
+     *
+     * @return bool
+     */
+    public function serializesCallbacks()
     {
         return false;
     }
