@@ -29,7 +29,7 @@ class ConsoleDriver implements DriverInterface
     /** @var array */
     protected $lastQuestions;
 
-    const DRIVER_NAME = 'SlackRTM';
+    const DRIVER_NAME = 'Console';
 
     const BOT_NAME = 'BotMan';
 
