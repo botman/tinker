@@ -75,7 +75,7 @@ class ConsoleDriver implements DriverInterface
      */
     public function getConversationAnswer(IncomingMessage $message)
     {
-        $index = (int)$message->getMessage() - 1;
+        $index = (int)$message->getText() - 1;
 
         if ($this->hasQuestion && isset($this->lastQuestions[$index])) {
             $question = $this->lastQuestions[$index];
