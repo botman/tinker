@@ -4,7 +4,7 @@ Gives your Laravel chatbot the ability to try your chatbot in your local termina
 
 ## Installation
 
-Run `composer require botman/tinker` to install the composer dependencies.
+Run `composer require mpociot/botman-tinker` to install the composer dependencies.
 
 Then in your `config/app.php` add
 
