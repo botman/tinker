@@ -9,7 +9,7 @@ Run `composer require mpociot/botman-tinker` to install the composer dependencie
 Then in your `config/app.php` add
 
 ```php
-BotMan\Tinker\TinkerServiceProvider::class,
+Mpociot\BotManTinker\BotManTinkerServiceProvider::class,
 ```
 
 to the `providers` array.
