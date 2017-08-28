@@ -17,9 +17,8 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "mpociot/botman": "~2.0",
+        "botman/botman": "~2.0",
         "clue/stdio-react": "^1.0",
-        "mpociot/slack-client": "^0.2.6",
         "illuminate/support": "~5.0"
     },
     "require-dev": {
@@ -37,12 +36,5 @@
                 "BotMan\\Tinker\\TinkerServiceProvider"
             ]
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
