@@ -23,7 +23,7 @@ class ConsoleDriver implements DriverInterface
     /** @var string */
     protected $bot_id;
 
-    /** @var boolean */
+    /** @var bool */
     protected $hasQuestion = false;
 
     /** @var array */
@@ -75,15 +75,17 @@ class ConsoleDriver implements DriverInterface
      */
     public function getConversationAnswer(IncomingMessage $message)
     {
-        $index = (int)$message->getText() - 1;
+        $index = (int) $message->getText() - 1;
 
         if ($this->hasQuestion && isset($this->lastQuestions[$index])) {
             $question = $this->lastQuestions[$index];
+
             return Answer::create($question['name'])
                 ->setInteractiveReply(true)
                 ->setValue($question['value'])
                 ->setMessage($message);
         }
+
         return Answer::create($this->message)->setMessage($message);
     }
 
@@ -163,9 +165,9 @@ class ConsoleDriver implements DriverInterface
         $questionData = $payload['questionData'];
         $this->client->writeln(self::BOT_NAME.': '.$payload['text']);
 
-        if (!is_null($questionData)) {
+        if (! is_null($questionData)) {
             foreach ($questionData['actions'] as $key => $action) {
-                $this->client->writeln(($key+1).') '.$action['text']);
+                $this->client->writeln(($key + 1).') '.$action['text']);
             }
             $this->hasQuestion = true;
             $this->lastQuestions = $questionData['actions'];
