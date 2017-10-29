@@ -122,7 +122,7 @@ class ConsoleDriver implements DriverInterface
      */
     public function getUser(IncomingMessage $matchingMessage)
     {
-        return new User($matchingMessage->getUser());
+        return new User($matchingMessage->getSender());
     }
 
     /**
