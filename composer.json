@@ -30,7 +30,7 @@
             "BotMan\\Tinker\\": "src/"
         }
     },
-    "extras": {
+    "extra": {
         "laravel": {
             "providers": [
                 "BotMan\\Tinker\\TinkerServiceProvider"
