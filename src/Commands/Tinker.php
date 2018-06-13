@@ -55,7 +55,7 @@ class Tinker extends Command
 
             $botman->setDriver(new ConsoleDriver($config, $stdio));
 
-            $stdio->on('line', function ($line) use ($botman) {
+            $stdio->on('data', function ($line) use ($botman) {
                 $botman->listen();
             });
 
