@@ -51,7 +51,7 @@ class Tinker extends Command
             $botman = BotManFactory::create($config, new ArrayCache());
 
             $stdio = new Stdio($loop);
-            $stdio->getReadline()->setPrompt('You: ');
+            $stdio->setPrompt('You: ');
 
             $botman->setDriver(new ConsoleDriver($config, $stdio));
 
