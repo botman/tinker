@@ -2,15 +2,15 @@
 
 namespace BotMan\Tinker\Drivers;
 
-use Clue\React\Stdio\Stdio;
-use BotMan\BotMan\Users\User;
-use Illuminate\Support\Collection;
-use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Interfaces\DriverInterface;
-use BotMan\BotMan\Messages\Outgoing\Question;
-use Symfony\Component\HttpFoundation\Response;
+use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+use BotMan\BotMan\Messages\Outgoing\Question;
+use BotMan\BotMan\Users\User;
+use Clue\React\Stdio\Stdio;
+use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\Response;
 
 class ConsoleDriver implements DriverInterface
 {
