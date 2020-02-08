@@ -2,12 +2,12 @@
 
 namespace BotMan\Tinker\Commands;
 
-use Clue\React\Stdio\Stdio;
-use React\EventLoop\Factory;
-use Illuminate\Console\Command;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Cache\ArrayCache;
 use BotMan\Tinker\Drivers\ConsoleDriver;
+use Clue\React\Stdio\Stdio;
+use Illuminate\Console\Command;
+use React\EventLoop\Factory;
 
 class Tinker extends Command
 {
