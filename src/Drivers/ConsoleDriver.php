@@ -193,4 +193,9 @@ class ConsoleDriver implements DriverInterface
     {
         return false;
     }
+
+    public function typesAndWaits(IncomingMessage $matchingMessage, float $seconds)
+    {
+        // TODO: Implement typesAndWaits() method.
+    }
 }
